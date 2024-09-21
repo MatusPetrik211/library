@@ -1,3 +1,13 @@
+const addBook = document.querySelector('.add-book');
+const bookContainer = document.querySelector('.book-container');
+
+addBook.addEventListener('click', () => {
+    const book = document.createElement('div');
+    book.classList.add('book');
+    bookContainer.appendChild(book);
+    console.log('hello');
+});
+
 const myLibrary = [];
 
 function Book(title, author, pages, read) {
@@ -13,3 +23,5 @@ function Book(title, author, pages, read) {
 function addBookToLibrary() {
 
 }
+
+
