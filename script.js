@@ -1,15 +1,6 @@
 const addBook = document.querySelector('.add-book');
 const bookContainer = document.querySelector('.book-container');
 
-addBook.addEventListener('click', () => {
-    const book = document.createElement('div');
-    book.classList.add('book');
-    bookContainer.appendChild(book);
-    console.log('hello');
-});
-
-const myLibrary = [];
-
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -19,6 +10,54 @@ function Book(title, author, pages, read) {
         return `${title} by ${author}, ${pages} pages, ${read}`;
     }
 }
+
+let book1 = new Book('Atomic Habits', 'James Clear', 320, true);
+let book2 = new Book('Think like a programmer', 'V. Anton Spraul', 233, false);
+let book3 = new Book('Don\'t Believe Everything You Think', 'Joseph Nguyen', 126, false);
+let book4 = new Book('Tao Te Ching', 'Lao Tzu', 128, false);
+
+const myLibrary = [book1, book2, book3, book4];
+
+function displayBooks() {
+    for(let book of myLibrary) {
+        const bookDiv = document.createElement('div');
+        bookDiv.classList.add('book');
+        bookContainer.appendChild(bookDiv);
+
+        const bookTitle = document.createElement('h2');
+        bookDiv.appendChild(bookTitle);
+        bookTitle.textContent = book.title;
+        bookTitle.classList.add('book-title');
+
+        const bookAuthor = document.createElement('h3');
+        bookDiv.appendChild(bookAuthor);
+        bookAuthor.textContent = `Author: ${book.author}`;
+
+        const bookPages = document.createElement('h4');
+        bookDiv.appendChild(bookPages);
+        bookPages.textContent = `Pages: ${book.pages}`;
+
+        const readState = document.createElement('button');
+        bookDiv.appendChild(readState);
+        readState.classList.add('read-button');
+
+        if(book.read) {
+            readState.textContent = 'Read';
+        }
+        else {
+            readState.textContent = 'Not Read';
+        }
+    }
+}
+
+displayBooks();
+
+addBook.addEventListener('click', () => {
+    const book = document.createElement('div');
+    book.classList.add('book');
+    bookContainer.appendChild(book);
+    console.log('hello');
+});
 
 function addBookToLibrary() {
 
