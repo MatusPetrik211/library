@@ -93,16 +93,19 @@ body {
     cursor: pointer;
 }
 
-.read-button {
+.read-button, .remove-button {
     align-self: end;
     margin-top: auto;
 
-    background-color: var(--dark-green);
-    color: white;
     border: 2px solid black;
     border-radius: 10px;
     font-size: 20px;
     height: 50px;
+}
+
+.read-button {
+    background-color: var(--dark-green);
+    color: white;
     width: 100px;
 }
 
@@ -115,6 +118,24 @@ body {
     background-color: rgb(60, 115, 49);
     cursor: pointer;
 }
+
+.remove-button {
+    background-color: rgb(153, 31, 31);
+    color: white;
+
+    width: 100px;
+}
+
+.remove-button:hover {
+    background-color: rgb(174, 36, 36);
+    cursor: pointer;
+}
+
+.remove-button:active {
+    background-color: rgb(187, 39, 39);
+    cursor: pointer;
+}
+
 
 .book-title {
     line-height: 1.5rem;

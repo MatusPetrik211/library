@@ -11,10 +11,10 @@ function Book(title, author, pages, read) {
     }
 }
 
-let book1 = new Book('Atomic Habits', 'James Clear', 320, true);
-let book2 = new Book('Think like a programmer', 'V. Anton Spraul', 233, false);
-let book3 = new Book('Don\'t Believe Everything You Think', 'Joseph Nguyen', 126, false);
-let book4 = new Book('Tao Te Ching', 'Lao Tzu', 128, false);
+let book1 = new Book('Atomic Habits', 'James Clear', 320, 'Read');
+let book2 = new Book('Think like a programmer', 'V. Anton Spraul', 233, 'Not Read');
+let book3 = new Book('Don\'t Believe Everything You Think', 'Joseph Nguyen', 126, 'Not Read');
+let book4 = new Book('Tao Te Ching', 'Lao Tzu', 128, 'Not Read');
 
 const myLibrary = [book1, book2, book3, book4];
 
@@ -40,13 +40,26 @@ function displayBooks() {
         const readState = document.createElement('button');
         bookDiv.appendChild(readState);
         readState.classList.add('read-button');
+        readState.textContent = book.read;
 
-        if(book.read) {
-            readState.textContent = 'Read';
-        }
-        else {
-            readState.textContent = 'Not Read';
-        }
+        readState.addEventListener('click', () => {
+            if(book.read === 'Read') {
+                book.read = 'Not Read'
+            }
+            else{
+                book.read = 'Read'
+            }
+            readState.textContent = book.read;
+        });
+
+        const removeBtn = document.createElement('button');
+        bookDiv.appendChild(removeBtn);
+        removeBtn.classList.add('remove-button');
+        removeBtn.textContent = 'Remove';
+
+        removeBtn.addEventListener('click', () => {
+            removeBtn.parentNode.remove();
+        });
     }
 }
 
@@ -56,7 +69,6 @@ addBook.addEventListener('click', () => {
     const book = document.createElement('div');
     book.classList.add('book');
     bookContainer.appendChild(book);
-    console.log('hello');
 });
 
 function addBookToLibrary() {
