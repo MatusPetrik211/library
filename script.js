@@ -20,12 +20,12 @@ function Book(title, author, pages, read) {
 }
 
 // Examples
-let book1 = new Book('Atomic Habits', 'James Clear', 320, 'Read');
-let book2 = new Book('Think like a programmer', 'V. Anton Spraul', 233, 'Not Read');
-let book3 = new Book('Don\'t Believe Everything You Think', 'Joseph Nguyen', 126, 'Not Read');
-let book4 = new Book('Tao Te Ching', 'Lao Tzu', 128, 'Not Read');
+//let book1 = new Book('Atomic Habits', 'James Clear', 320, 'Read');
+//let book2 = new Book('Think like a programmer', 'V. Anton Spraul', 233, 'Not Read');
+//let book3 = new Book('Don\'t Believe Everything You Think', 'Joseph Nguyen', 126, 'Not Read');
+//let book4 = new Book('Tao Te Ching', 'Lao Tzu', 128, 'Not Read');
 
-let myLibrary = [book1, book2, book3, book4];
+let myLibrary = [];
 
 function displayBooks() {
     for(let book of myLibrary) {
