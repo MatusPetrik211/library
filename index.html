@@ -10,9 +10,33 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title">My Library</h1>
+        <h1 class="header">My Library</h1>
         <div class="book-container"></div>
         <button class="add-book">+</button>
     </div>
+    <dialog class="modal">
+        <form action="" method="dialog">
+            <div>
+                <label for="title">Title: </label>
+                <input id="title">
+            </div>
+            <div>
+                <label for="author">Author: </label>
+                <input id="author">
+            </div>
+            <div>
+                <label for="pages">Pages: </label>
+                <input id="pages" type="number" required>
+            </div>
+            <div>
+                <label for="read">Have you read it? </label>
+                <input type="checkbox" id="read">
+            </div>
+            <div>
+                <button id="closeBtn">Close</button>
+                <button id="confirmBtn">Confirm</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>

@@ -1,5 +1,13 @@
 const addBook = document.querySelector('.add-book');
 const bookContainer = document.querySelector('.book-container');
+const dialog = document.querySelector('dialog');
+const form = document.querySelector('form');
+const confirmBtn = document.querySelector('#confirmBtn');
+const closeBtn = document.querySelector('#closeBtn');
+const title = document.querySelector('#title').value;
+const author = document.querySelector('#author').value;
+const pages = document.querySelector('#pages').value;
+const read = document.querySelector('#read').value;
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -11,12 +19,13 @@ function Book(title, author, pages, read) {
     }
 }
 
+// Examples
 let book1 = new Book('Atomic Habits', 'James Clear', 320, 'Read');
 let book2 = new Book('Think like a programmer', 'V. Anton Spraul', 233, 'Not Read');
 let book3 = new Book('Don\'t Believe Everything You Think', 'Joseph Nguyen', 126, 'Not Read');
 let book4 = new Book('Tao Te Ching', 'Lao Tzu', 128, 'Not Read');
 
-const myLibrary = [book1, book2, book3, book4];
+let myLibrary = [book1, book2, book3, book4];
 
 function displayBooks() {
     for(let book of myLibrary) {
@@ -59,6 +68,8 @@ function displayBooks() {
 
         removeBtn.addEventListener('click', () => {
             removeBtn.parentNode.remove();
+            myLibrary = myLibrary.filter(item => item !== book);
+            console.log(myLibrary);
         });
     }
 }
@@ -66,13 +77,38 @@ function displayBooks() {
 displayBooks();
 
 addBook.addEventListener('click', () => {
-    const book = document.createElement('div');
-    book.classList.add('book');
-    bookContainer.appendChild(book);
+    form.reset();
+    dialog.showModal();
 });
 
-function addBookToLibrary() {
+closeBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    dialog.close()
+});
 
+confirmBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    let title = document.querySelector('#title').value;
+    let author = document.querySelector('#author').value;
+    let pages = document.querySelector('#pages').value;
+    let read = document.querySelector('#read');
+
+    if(validate(title) && validate(author) && validate(pages)) {
+        let book = new Book(title, author, pages, read.checked ? 'Read' : 'Not Read');
+        myLibrary.push(book);
+        bookContainer.textContent = '';
+        displayBooks();
+        dialog.close();
+    } else {
+        alert('You need to fill out the whole form');
+    }
+});
+
+function validate(input) {
+    input = input.trim();
+    if(input === '') {
+        return false;
+    }
+    return true;
 }
-
-
