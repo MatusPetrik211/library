@@ -9,15 +9,28 @@ const author = document.querySelector('#author').value;
 const pages = document.querySelector('#pages').value;
 const read = document.querySelector('#read').value;
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.info = function() {
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+    info() {
         return `${title} by ${author}, ${pages} pages, ${read}`;
     }
 }
+
+// function Book(title, author, pages, read) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+//     this.info = function() {
+//         return `${title} by ${author}, ${pages} pages, ${read}`;
+//     }
+// }
 
 // Examples
 //let book1 = new Book('Atomic Habits', 'James Clear', 320, 'Read');
