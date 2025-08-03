@@ -102,12 +102,16 @@ closeBtn.addEventListener('click', (event) => {
 confirmBtn.addEventListener('click', (event) => {
     event.preventDefault();
 
-    let title = document.querySelector('#title').value;
-    let author = document.querySelector('#author').value;
-    let pages = document.querySelector('#pages').value;
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const pages = parseInt(document.querySelector('#pages').value);
     let read = document.querySelector('#read');
 
-    if(validate(title) && validate(author) && validate(pages)) {
+    if (validate(title) && validate(author)) {
+        if (!validatePages(pages)) {
+            alert("Page number must be greater or equal to 1");
+            return
+        }
         let book = new Book(title, author, pages, read.checked ? 'Read' : 'Not Read');
         myLibrary.push(book);
         bookContainer.textContent = '';
@@ -119,8 +123,14 @@ confirmBtn.addEventListener('click', (event) => {
 });
 
 function validate(input) {
-    input = input.trim();
-    if(input === '') {
+    if (input.trim() === '') {
+        return false;
+    }
+    return true;
+}
+
+function validatePages(numInput) {
+    if (1 > numInput) {
         return false;
     }
     return true;
