@@ -1,25 +1,25 @@
-const addBook = document.querySelector('.add-book');
-const bookContainer = document.querySelector('.book-container');
-const dialog = document.querySelector('dialog');
-const form = document.querySelector('form');
-const confirmBtn = document.querySelector('#confirmBtn');
-const closeBtn = document.querySelector('#closeBtn');
-const title = document.querySelector('#title').value;
-const author = document.querySelector('#author').value;
-const pages = document.querySelector('#pages').value;
-const read = document.querySelector('#read').value;
+const addBook = document.querySelector(".add-book");
+const bookContainer = document.querySelector(".book-container");
+const dialog = document.querySelector("dialog");
+const form = document.querySelector("form");
+const confirmBtn = document.querySelector("#confirmBtn");
+const closeBtn = document.querySelector("#closeBtn");
+const title = document.querySelector("#title").value;
+const author = document.querySelector("#author").value;
+const pages = document.querySelector("#pages").value;
+const read = document.querySelector("#read").value;
 
 class Book {
-    constructor(title, author, pages, read) {
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = read;
-    }
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-    info() {
-        return `${title} by ${author}, ${pages} pages, ${read}`;
-    }
+  info() {
+    return `${title} by ${author}, ${pages} pages, ${read}`;
+  }
 }
 
 // function Book(title, author, pages, read) {
@@ -41,97 +41,100 @@ class Book {
 let myLibrary = [];
 
 function displayBooks() {
-    for(let book of myLibrary) {
-        const bookDiv = document.createElement('div');
-        bookDiv.classList.add('book');
-        bookContainer.appendChild(bookDiv);
+  for (let book of myLibrary) {
+    const bookDiv = document.createElement("div");
+    bookDiv.classList.add("book");
+    bookContainer.appendChild(bookDiv);
 
-        const bookTitle = document.createElement('h2');
-        bookDiv.appendChild(bookTitle);
-        bookTitle.textContent = book.title;
-        bookTitle.classList.add('book-title');
+    const bookTitle = document.createElement("h2");
+    bookDiv.appendChild(bookTitle);
+    bookTitle.textContent = book.title;
+    bookTitle.classList.add("book-title");
 
-        const bookAuthor = document.createElement('h3');
-        bookDiv.appendChild(bookAuthor);
-        bookAuthor.textContent = `Author: ${book.author}`;
+    const bookAuthor = document.createElement("h3");
+    bookDiv.appendChild(bookAuthor);
+    bookAuthor.textContent = `Author: ${book.author}`;
 
-        const bookPages = document.createElement('h4');
-        bookDiv.appendChild(bookPages);
-        bookPages.textContent = `Pages: ${book.pages}`;
+    const bookPages = document.createElement("h4");
+    bookDiv.appendChild(bookPages);
+    bookPages.textContent = `Pages: ${book.pages}`;
 
-        const readState = document.createElement('button');
-        bookDiv.appendChild(readState);
-        readState.classList.add('read-button');
-        readState.textContent = book.read;
+    const readState = document.createElement("button");
+    bookDiv.appendChild(readState);
+    readState.classList.add("read-button");
+    readState.textContent = book.read;
 
-        readState.addEventListener('click', () => {
-            if(book.read === 'Read') {
-                book.read = 'Not Read'
-            }
-            else{
-                book.read = 'Read'
-            }
-            readState.textContent = book.read;
-        });
+    readState.addEventListener("click", () => {
+      if (book.read === "Read") {
+        book.read = "Not Read";
+      } else {
+        book.read = "Read";
+      }
+      readState.textContent = book.read;
+    });
 
-        const removeBtn = document.createElement('button');
-        bookDiv.appendChild(removeBtn);
-        removeBtn.classList.add('remove-button');
-        removeBtn.textContent = 'Remove';
+    const removeBtn = document.createElement("button");
+    bookDiv.appendChild(removeBtn);
+    removeBtn.classList.add("remove-button");
+    removeBtn.textContent = "Remove";
 
-        removeBtn.addEventListener('click', () => {
-            removeBtn.parentNode.remove();
-            myLibrary = myLibrary.filter(item => item !== book);
-            console.log(myLibrary);
-        });
-    }
+    removeBtn.addEventListener("click", () => {
+      removeBtn.parentNode.remove();
+      myLibrary = myLibrary.filter((item) => item !== book);
+    });
+  }
 }
 
 displayBooks();
 
-addBook.addEventListener('click', () => {
-    form.reset();
-    dialog.showModal();
+addBook.addEventListener("click", () => {
+  form.reset();
+  dialog.showModal();
 });
 
-closeBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    dialog.close()
+closeBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  dialog.close();
 });
 
-confirmBtn.addEventListener('click', (event) => {
-    event.preventDefault();
+confirmBtn.addEventListener("click", (event) => {
+  event.preventDefault();
 
-    const title = document.querySelector('#title').value;
-    const author = document.querySelector('#author').value;
-    const pages = parseInt(document.querySelector('#pages').value);
-    let read = document.querySelector('#read');
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const pages = parseInt(document.querySelector("#pages").value);
+  let read = document.querySelector("#read");
 
-    if (validate(title) && validate(author)) {
-        if (!validatePages(pages)) {
-            alert("Page number must be greater or equal to 1");
-            return
-        }
-        let book = new Book(title, author, pages, read.checked ? 'Read' : 'Not Read');
-        myLibrary.push(book);
-        bookContainer.textContent = '';
-        displayBooks();
-        dialog.close();
-    } else {
-        alert('You need to fill out the whole form');
+  if (validate(title) && validate(author)) {
+    if (!validatePages(pages)) {
+      alert("Page number must be greater or equal to 1");
+      return;
     }
+    let book = new Book(
+      title,
+      author,
+      pages,
+      read.checked ? "Read" : "Not Read"
+    );
+    myLibrary.push(book);
+    bookContainer.textContent = "";
+    displayBooks();
+    dialog.close();
+  } else {
+    alert("You need to fill out the whole form");
+  }
 });
 
 function validate(input) {
-    if (input.trim() === '') {
-        return false;
-    }
-    return true;
+  if (input.trim() === "") {
+    return false;
+  }
+  return true;
 }
 
 function validatePages(numInput) {
-    if (1 > numInput) {
-        return false;
-    }
-    return true;
+  if (1 > numInput) {
+    return false;
+  }
+  return true;
 }
